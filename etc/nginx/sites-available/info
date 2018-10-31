@@ -1,0 +1,15 @@
+server {
+	listen 88;
+
+	root /var/www/info;
+
+	index index.php;
+
+	server_name localhost;
+
+	location ~ \.php$ {
+
+	    include snippets/fastcgi-php.conf;
+	    fastcgi_pass unix:/run/php/php7.2-fpm.sock;
+	}
+}
