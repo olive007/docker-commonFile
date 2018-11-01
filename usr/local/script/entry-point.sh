@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 SIGNAL_CAUGHT=false
 CHILDREN_SCRIPT_DIRECTORY=/usr/local/script/entry-point.d

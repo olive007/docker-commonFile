@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 XDEBUG_HOST=`hostname -i | cut -d. -f1-3`.1
 PHP_VERSION=`php -r "echo PHP_VERSION;" | cut -c 1,3 --output-delimiter="."`
@@ -16,11 +16,13 @@ sed -i "s/^group =.*$/group = $CONTAINER_USER_NAME/" /etc/php/$PHP_VERSION/fpm/p
 sed -i "s/^listen.owner =.*$/listen.owner = $CONTAINER_USER_NAME/" /etc/php/$PHP_VERSION/fpm/pool.d/www.conf
 sed -i "s/^listen.group =.*$/listen.group = $CONTAINER_USER_NAME/" /etc/php/$PHP_VERSION/fpm/pool.d/www.conf
 
-for var in $(compgen -e); do
+for var in $(env | cut -d'=' -f1); do
 
     if [[ "$var" == PHP_INIT_* ]]; then
-        opt=`echo ${var:9} | tr '[:upper:] [:lower:]`
+        opt=`echo ${var:9} | tr '[:upper:]' '[:lower:]'`
 	value=${!var}
+
+	echo "Setting php.ini $opt as $value"
 
 	sed -i "s/.*$opt =.*$/$opt = $value/" /etc/php/$PHP_VERSION/fpm/php.ini
     fi
@@ -28,4 +30,3 @@ for var in $(compgen -e); do
 done
 
 export PHP_IDE_CONFIG=`hostname -i`
-
