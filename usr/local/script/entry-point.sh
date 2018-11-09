@@ -80,6 +80,10 @@ if [ $? -ne 0 ]; then
 	. $CHILDREN_SCRIPT_DIRECTORY/$filename
 
     done
+
+    # Reset the owner to the user in case we mount a file into the home directory :)
+    chown -R $CONTAINER_USER_NAME:$CONTAINER_USER_NAME /home/$CONTAINER_USER_NAME 2>/dev/null
+    
 else
 
     echo "Container restarted $INTERACTIVE_OR_NOT (IP: "`hostname -i`")"
