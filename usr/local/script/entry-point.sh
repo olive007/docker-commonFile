@@ -59,7 +59,7 @@ if [ $? -ne 0 ]; then
 
     # Add the public ssh key to the 'authorized_keys' file to easily access to the docker container
     su $CONTAINER_USER_NAME -c "mkdir /home/$CONTAINER_USER_NAME/.ssh"
-    su $CONTAINER_USER_NAME -c "wget -q $CONTAINER_SSH_KEY_URL -O /home/$CONTAINER_USER_NAME/.ssh/authorized_keys"
+    su $CONTAINER_USER_NAME -c "wget -q $CONTAINER_URL_SSH_KEY -O /home/$CONTAINER_USER_NAME/.ssh/authorized_keys"
 
 
     echo "Changing user id to $CONTAINER_USER_UID"
@@ -69,8 +69,8 @@ if [ $? -ne 0 ]; then
 
 
     echo "Customize bash configuration"
-    wget -q $CONTAINER_BASH_ALIASES -O/home/bash.aliases 
-    wget -q $CONTAINER_BASH_PROMPT -O/home/bash.prompt
+    wget -q $CONTAINER_URL_BASH_ALIASES -O/home/bash.aliases 
+    wget -q $CONTAINER_URL_BASH_PROMPT -O/home/bash.prompt
     chmod 644 /home/bash.aliases /home/bash.prompt
 
 
