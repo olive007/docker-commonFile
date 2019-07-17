@@ -90,7 +90,8 @@ else
 fi
 
 
-if [ "$@" = "default-command" ]; then
+# Check if we ask the default command or something else
+if [ "$1" = "default-command" ] && [ "$#" = "1" ]; then
     
     # Launch the startup script
     /usr/local/script/startup.sh
