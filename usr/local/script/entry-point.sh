@@ -111,5 +111,8 @@ if [ "$1" = "default-command" ] && [ "$#" = "1" ]; then
     fi
 
 else
-    exec su $CONTAINER_USER_NAME -c $@
+
+    echo "Executing $@ with user $CONTAINER_USER_NAME"
+    echo $@ | exec su $CONTAINER_USER_NAME -
+
 fi
